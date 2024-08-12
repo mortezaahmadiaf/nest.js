@@ -21,7 +21,7 @@ export class UserController {
   ) {}
   @Get()
   async findAllUsers() {
-    const res = await this.userService.findAll(0, 10, '');
+    const res = await this.userService.findAll(0, 10, 'id', 'ASC');
     return res;
   }
   @Get('/:id')
@@ -52,8 +52,8 @@ export class UserController {
     return res;
   }
 
-  @Delete()
-  async deleteUser() {
-    return await this.userService.delete();
+  @Delete(':id')
+  async deleteUser(@Param('id') id: number) {
+    return await this.userService.delete(id);
   }
 }
