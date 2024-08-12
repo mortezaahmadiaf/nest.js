@@ -1,16 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from './entity';
+import { Repository } from 'typeorm';
+import { CreateUserDto } from './dto/create-user-dto';
+import { UpdateUserDto } from './dto/update-user-dto';
 
 @Injectable()
 export class UserService {
-  findOne(id: string) {
-    return { id };
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly useRepo: Repository<UserEntity>,
+  ) {}
+  async findOne(id: number) {
+    const res = await this.useRepo.findOne({ where: { id } });
+    return res;
   }
-  findAll(page: number, size: number, order: string) {
-    return { page, size, order };
+  async findAll(page: number, size: number, order: string) {
+    const res = await this.useRepo.find({
+      skip: page * size,
+      take: size,
+      order: { id: 'desc' },
+    });
+    return res;
   }
 
-  create() {}
-  update() {}
-  delete() {}
-  patch() {}
+  async create(data: CreateUserDto) {
+    const res = await this.useRepo.create(data);
+    return res;
+  }
+  async update(data: UpdateUserDto) {
+    const res = await this.useRepo.update({ id: data.id }, data);
+    return res;
+  }
+  async delete() {}
+  async patch() {}
 }

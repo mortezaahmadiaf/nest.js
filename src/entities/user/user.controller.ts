@@ -20,39 +20,40 @@ export class UserController {
     private readonly commentService: CommentService,
   ) {}
   @Get()
-  findAllUsers() {
-    this.userService.findAll(0, 10, '');
-    return 'get user';
+  async findAllUsers() {
+    const res = await this.userService.findAll(0, 10, '');
+    return res;
   }
-  @Get(':id')
-  finedUserById(@Param('id') id: string) {
-    this.userService.findOne(id);
-    return 'get user';
+  @Get('/:id')
+  async finedUserById(@Param('id') id: number) {
+    const res = await this.userService.findOne(id);
+    return res;
   }
   @Get('comment/:id')
-  finedCommentsUserById(@Param('id') id: string) {
-    this.commentService.findUserComment(id);
-    return 'get user';
+  async finedCommentsUserById(@Param('id') id: string) {
+    const res = await this.commentService.findUserComment(id);
+    return res;
   }
   @Post()
-  createUser(@Body() body: CreateUserDto) {
-    this.userService.create();
-    return body;
+  async createUser(@Body() body: CreateUserDto) {
+    const res = await this.userService.create(body);
+    return res;
   }
 
   @Put()
-  updateUser(@Body() body: UpdateUserDto) {
-    this.userService.update;
-    return body;
+  async updateUser(@Body() body: UpdateUserDto) {
+    const res = await this.userService.update;
+    return res;
   }
 
   @Patch()
-  patchUser() {
-    this.userService.patch();
+  async patchUser() {
+    const res = await this.userService.patch();
+    return res;
   }
 
   @Delete()
-  deleteUser() {
-    this.userService.delete();
+  async deleteUser() {
+    return await this.userService.delete();
   }
 }
