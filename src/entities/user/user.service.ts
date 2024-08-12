@@ -15,11 +15,16 @@ export class UserService {
     const res = await this.useRepo.findOne({ where: { id } });
     return res;
   }
-  async findAll(page: number, size: number, order: string) {
+  async findAll(
+    page: number,
+    size: number,
+    sort: 'id' | 'name' | 'email',
+    order: 'ASC' | 'asc' | 'DESC' | 'desc',
+  ) {
     const res = await this.useRepo.find({
       skip: page * size,
       take: size,
-      order: { id: 'desc' },
+      order: { [sort]: order },
     });
     return res;
   }
