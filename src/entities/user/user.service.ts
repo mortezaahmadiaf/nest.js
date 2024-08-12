@@ -25,13 +25,17 @@ export class UserService {
   }
 
   async create(data: CreateUserDto) {
-    const res = await this.useRepo.create(data);
+    const user = await this.useRepo.create(data);
+    const res = await this.useRepo.save(user);
     return res;
   }
   async update(data: UpdateUserDto) {
     const res = await this.useRepo.update({ id: data.id }, data);
     return res;
   }
-  async delete() {}
+  async delete(id: number) {
+    const res = await this.useRepo.delete({ id });
+    return res;
+  }
   async patch() {}
 }
