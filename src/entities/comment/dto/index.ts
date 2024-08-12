@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { IsNumber, IsString } from 'class-validator';
 
 export class CreateCommentDto {
@@ -9,4 +10,9 @@ export class CreateCommentDto {
 
   @IsNumber()
   topicId: number;
+}
+
+export class UpdateCommentDto extends PartialType(CreateCommentDto) {
+  @IsNumber()
+  id: number;
 }

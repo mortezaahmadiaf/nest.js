@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user-dto';
-import { UpdateUserDto } from './dto/update-user-dto';
+import { CreateUserDto, UpdateUserDto } from './dto';
 
 @Injectable()
 export class UserService {
@@ -43,4 +42,9 @@ export class UserService {
     return res;
   }
   async patch() {}
+
+  async findOneWithUsername(username: string) {
+    const user = await this.useRepo.findOne({ where: { email: username } });
+    return user;
+  }
 }

@@ -5,6 +5,7 @@ import { UserModule } from './entities/user/user.module';
 import { CommentModule } from './entities/comment/comment.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TopicModule } from './entities/topic/topic.module';
+import { AuthModule } from './entities/auth/auth.module';
 import config from 'ormconfig';
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import config from 'ormconfig';
     CommentModule,
     TypeOrmModule.forRoot(config),
     TopicModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
