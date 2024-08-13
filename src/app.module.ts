@@ -6,6 +6,7 @@ import { CommentModule } from './entities/comment/comment.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TopicModule } from './entities/topic/topic.module';
 import { AuthModule } from './entities/auth/auth.module';
+import { ProducerModule } from './entities/producer/producer.module';
 import config from 'ormconfig';
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import config from 'ormconfig';
     TypeOrmModule.forRoot(config),
     TopicModule,
     AuthModule,
+    ProducerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

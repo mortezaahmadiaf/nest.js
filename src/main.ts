@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-
+import { ConcumerModule } from './entities/concumer/concumer.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // new ValidationPipe to add validation
@@ -11,5 +12,15 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
   await app.listen(3000);
+
+  const rabbitMicroservice =
+    await NestFactory.createMicroservice<MicroserviceOptions>(ConcumerModule, {
+      transport: Transport.RMQ,
+      options: {
+        urls: ['amqp://localhost:5672'],
+        queue: 'rabbitmq-queue',
+      },
+    });
+  await rabbitMicroservice.listen();
 }
 bootstrap();
