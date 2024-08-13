@@ -6,8 +6,8 @@ export class CreateUserDto {
   name: string;
   @IsEmail()
   email: string;
-  @IsPhoneNumber()
-  phone: string;
+  @IsString()
+  password: string;
 }
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsNumber()
