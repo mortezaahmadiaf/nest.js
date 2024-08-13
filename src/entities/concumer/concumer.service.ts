@@ -4,6 +4,5 @@ import { Injectable } from '@nestjs/common';
 export class ConcumerService {
   async handleOrderPlaced(payload) {
     console.log('concume data from rabbitmq-queue queue is  ', payload);
-    return 'Hello World!';
   }
 }

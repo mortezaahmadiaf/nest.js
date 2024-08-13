@@ -8,6 +8,6 @@ export class ConcumerController {
 
   @EventPattern('rabbitmq-queue')
   async handleOrderPlaced(@Payload() payload) {
-    return this.concumerService.handleOrderPlaced(payload);
+    this.concumerService.handleOrderPlaced(payload);
   }
 }
