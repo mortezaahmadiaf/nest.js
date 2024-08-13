@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TopicModule } from './entities/topic/topic.module';
 import { AuthModule } from './entities/auth/auth.module';
 import { ProducerModule } from './entities/producer/producer.module';
+import { ConcumerModule } from './entities/concumer/concumer.module';
 import config from 'ormconfig';
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import config from 'ormconfig';
     TopicModule,
     AuthModule,
     ProducerModule,
+    ConcumerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
